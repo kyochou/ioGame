@@ -102,8 +102,10 @@ public class BarSkeletonDoc {
                     .map(ActionCommandDoc::getActionCommand)
                     .filter(Objects::nonNull)
                     .forEach(subBehavior -> {
-                        docInfo.setHead(subBehavior);
-                        docInfo.add(subBehavior);
+                        if (!subBehavior.getActionMethodName().startsWith("_")) {
+                            docInfo.setHead(subBehavior);
+                            docInfo.add(subBehavior);
+                        }
                     });
 
             String render = docInfo.render();
@@ -115,7 +117,7 @@ public class BarSkeletonDoc {
         extractedActionSend(actionSendDocsRegion, docContentList);
 
         // 生成文档 - 错误码文档
-        extractedErrorCode(docContentList);
+//        extractedErrorCode(docContentList);
 
         String docText = String.join("", docContentList);
         FileKit.writeUtf8String(docText, docPath);
