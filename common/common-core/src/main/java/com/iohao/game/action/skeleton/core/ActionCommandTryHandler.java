@@ -41,7 +41,9 @@ final class ActionCommandTryHandler extends ActionCommandHandler {
         try {
             return super.handler(flowContext);
         } catch (Throwable e) {
-            log.error(e.getMessage(), e);
+            if (System.getenv("K_ENV") == "dev" || System.getProperty("spring.profiles.active") == "dev") {
+                log.error(e.getMessage(), e);
+            }
             // 不往上抛异常了，因为上层默认的线程池实现没做捕获；DefaultRequestMessageClientProcessorHook
             return false;
         }
