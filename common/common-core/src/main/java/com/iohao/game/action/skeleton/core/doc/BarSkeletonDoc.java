@@ -117,7 +117,7 @@ public class BarSkeletonDoc {
         extractedActionSend(actionSendDocsRegion, docContentList);
 
         // 生成文档 - 错误码文档
-//        extractedErrorCode(docContentList);
+        extractedErrorCode(docContentList);
 
         String docText = String.join("", docContentList);
         FileKit.writeUtf8String(docText, docPath);
