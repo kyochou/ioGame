@@ -40,7 +40,9 @@ class ActionCommandHandler implements Handler {
             // actionCommand 命令流程执行器
             DefaultActionCommandFlowExecute.me().execute(flowContext);
         } catch (Throwable e) {
-            log.error(e.getMessage(), e);
+            if (System.getenv("K_ENV").equals("dev") || System.getProperty("spring.profiles.active").equals("dev")) {
+                log.error(e.getMessage(), e);
+            }
             return false;
         }
 
